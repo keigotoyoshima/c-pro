@@ -57,11 +57,11 @@ int main()
     for (int i = 0; i < N; i++)
       dp[i][i] = A[i];
 
-  for (int i = 0; i < N; i++) {
-  	for (int j = 0; j < N; j++)
-  		cout << dp[i][j] << " ";
-  	cout << endl;
-  }
+  // for (int i = 0; i < N; i++) {
+  // 	for (int j = 0; j < N; j++)
+  // 		cout << dp[i][j] << " ";
+  // 	cout << endl;
+  // }
 
   for (int l = 2; l <= N; l++)
     for (int i = 0; i < N; i++)
@@ -82,12 +82,12 @@ int main()
       }
     }
   int ans = 0;
-  for (int i = 0; i < N; i++)
-  {
-    for (int j = 0; j < N; j++)
-      cout << dp[i][j] << " ";
-    cout << endl;
-  }
+  // for (int i = 0; i < N; i++)
+  // {
+  //   for (int j = 0; j < N; j++)
+  //     cout << dp[i][j] << " ";
+  //   cout << endl;
+  // }
   for (int i = 0; i < N; i++)
     ans = max(ans, dp[i][(i + N - 1) % N]);
   cout << ans << endl;
