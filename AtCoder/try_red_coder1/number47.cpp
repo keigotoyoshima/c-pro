@@ -43,25 +43,19 @@ const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
 int main()
 {
-  int N;
+  ll N;
   cin >> N;
-  vector<int> A(N);
+  vector<ll> A(N);
   for (int i = 0; i < N; i++)
     cin >> A[i];
 
-  vector<vector<int>> dp(N, vector<int>(N, 0));
+  vector<vector<ll>> dp(N, vector<ll>(N, 0));
   // 残り[i,j]の状況からはじめたときのJOIくんの取り分の最大値
-
-  // 初期化
-  if (N % 2 == 1)
-    for (int i = 0; i < N; i++)
-      dp[i][i] = A[i];
-
-  // for (int i = 0; i < N; i++) {
-  // 	for (int j = 0; j < N; j++)
-  // 		cout << dp[i][j] << " ";
-  // 	cout << endl;
-  // }
+  for (int i = 0; i < N; i++)
+  {
+    dp[i][i] = A[i];
+  }
+  
 
   for (int l = 2; l <= N; l++)
     for (int i = 0; i < N; i++)
@@ -69,7 +63,8 @@ int main()
       int j = (i + l - 1) % N;
       // lが区間距離
       // iが左側でjが右側
-      if (l % 2 == N % 2)
+      // cout << i << " " << j << " " << l <<  endl;
+      if (l % 2 == 1)
       // JOIのターン
         dp[i][j] = max(A[i] + dp[(i + 1) % N][j], A[j] + dp[i][(j + N - 1) % N]);
       else
@@ -81,13 +76,8 @@ int main()
           dp[i][j] = dp[i][(j + N - 1) % N];
       }
     }
-  int ans = 0;
-  // for (int i = 0; i < N; i++)
-  // {
-  //   for (int j = 0; j < N; j++)
-  //     cout << dp[i][j] << " ";
-  //   cout << endl;
-  // }
+  ll ans = 0;
+
   for (int i = 0; i < N; i++)
     ans = max(ans, dp[i][(i + N - 1) % N]);
   cout << ans << endl;
