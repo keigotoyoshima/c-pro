@@ -26,7 +26,7 @@ int main() {
         G[a].push_back(b);
     }
     seen.assign(N, false); 
-    dfs(G, s);
+    dfs(s);
     if (seen[t]) cout << "Yes" << endl;
     else cout << "No" << endl;
 }

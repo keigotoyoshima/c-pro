@@ -7,7 +7,7 @@ bool isOK(int index, int key) {
 }
 
 
-int binary_search(int key) {
+int binary_search(int key) {    
     int ng = -1;  
     int ok = (int)a.size();
 
