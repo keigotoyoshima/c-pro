@@ -22,6 +22,12 @@ string charToString(char c){
   return s;
 }
 
+// string to char
+char stringToChar(string s){
+  char c = s[0];
+  return c;
+}
+
 // char to int
 int charToInt(char c){
   return c - '0';
