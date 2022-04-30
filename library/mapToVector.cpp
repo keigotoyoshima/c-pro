@@ -47,7 +47,7 @@ int main()
   int n; cin >> n;
   // 実際の値を二次元配列に保持
   vector<vector<int>> v;
-  // vのindexを保持(つまり，id->index) pair(index, indexの進行状況)
+  // vのindexを保持(つまり，id->pair) pair(index, indexの進行状況)
   map<int, pair<int,int>> mp;
 
   for (int i = 0; i < n; i++)
