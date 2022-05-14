@@ -6,7 +6,7 @@ bool isOK(int index, int key) {
     else return false;
 }
 
-
+// keyを基準として大きいか小さいか．左端を-1，右端をa.size()にしていることに注意
 int binary_search(int key) {    
     int ng = -1;  
     int ok = (int)a.size();
