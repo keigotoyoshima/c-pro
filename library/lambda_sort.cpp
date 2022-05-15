@@ -15,13 +15,23 @@ int main(){
   iota(v.begin(), v.end(), 0);
 
 
-  // [&]はキャプチャ記法
-  // ここでは基本的にa配列の大小で比較し，同一値の時は，b配列でsort
-  sort(v.begin(), v.end(), [&](int l, int r) {
+  // 二つの配列をもとにしてsortしたい場合
+  // a配列で昇順sort，同一値の時は，b配列で昇順sort
+  sort(v.begin(), v.end(), [&](auto l, auto r) {
     if(a[l] == a[r]){
       return b[l] < b[r];
     }else{
       return a[l] < a[r];
+    }
+  });
+
+
+  // template用
+  sort(V.begin(), V.end(), [&](auto l, auto r) {
+    if(V[l] == V[r]){
+      return V[l] < V[r];
+    }else{
+      return V[l] < V[r];
     }
   });
 
