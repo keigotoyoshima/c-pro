@@ -69,21 +69,6 @@ int main()
     b.push_back(tem2);
     c.push_back(tem3);
   }
-  for (int i = 0; i < a.size(); i++)
-  {
-    cout << a[i] << " ";
-  }
-  cout << endl;
-  for (int i = 0; i < b.size(); i++)
-  {
-    cout << b[i] << " ";
-  }
-  cout << endl;
-  for (int i = 0; i < c.size(); i++)
-  {
-    cout << c[i] << " ";
-  }
-  cout << endl;
 
   return 0;
 }
