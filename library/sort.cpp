@@ -71,18 +71,29 @@ int main()
   }
   sort(pair_list.begin(), pair_list.end());
   cout << "-------" << endl;
+  for (int i = 0; i < pair_list.size(); i++)
+  {
+    cout << pair_list[i].first << " " << pair_list[i].second << endl;
+  }
+  cout << "-------" << endl;
   sort1(pair_list);
   for (int i = 0; i < pair_list.size(); i++)
   {
     cout << pair_list[i].first << " " << pair_list[i].second << endl;
   }
 }
-
 // 2 3
 // 2 4
 // 2 1
 // 3 3
 // 1 3
+// 10 1
+// -------
+// 1 3
+// 2 1
+// 2 3
+// 2 4
+// 3 3
 // 10 1
 // -------
 // 1 3
