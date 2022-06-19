@@ -31,48 +31,76 @@ const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
 
 
+// int main(){
+//   int n; cin >> n;
+//   vector<pair<int,int>>LR;
+//   for (int i = 0; i < n; i++)
+//   {
+//     int l,r; cin >> l >> r;
+//     LR.push_back(make_pair(l,r));
+//   }
+//   sort(LR.begin(), LR.end());
+
+//   vector<pair<int, int>> ans;
+//   int l = LR[0].first;
+//   int r = LR[0].second;
+//   if(n == 1){
+//     ans.push_back(make_pair(l, r));
+//   }
+//   for (int i = 1; i < n; i++)
+//   {
+//     int tem_l = LR[i].first;
+//     int tem_r = LR[i].second;
+//     if(r < tem_l){
+//       ans.push_back(make_pair(l,r));
+//       l = LR[i].first;
+//       r = LR[i].second;
+//     }else{
+//       if(r < tem_r){
+//         r = tem_r;
+//       }
+//     }
+//     if (i + 1 == n)
+//     {
+//       ans.push_back(make_pair(l, r));
+//     }
+//     // cout << l << " " << r << endl;
+
+//   }
+//   for (int i = 0; i < ans.size(); i++)
+//   {
+//     cout << ans[i].first << " " << ans[i].second << endl;
+//   }
+  
+
+//   return 0;
+// }
+
+// 解法2
 int main(){
   int n; cin >> n;
   vector<pair<int,int>>LR;
   for (int i = 0; i < n; i++)
   {
     int l,r; cin >> l >> r;
-    LR.push_back(make_pair(l,r));
-  }
+    LR.push_back((make_pair(l,r)));
+  } 
   sort(LR.begin(), LR.end());
 
   vector<pair<int, int>> ans;
-  int l = LR[0].first;
-  int r = LR[0].second;
-  if(n == 1){
-    ans.push_back(make_pair(l, r));
-  }
-  for (int i = 1; i < n; i++)
-  {
-    bool flag = true;
-    int tem_l = LR[i].first;
-    int tem_r = LR[i].second;
-    if(r < tem_l){
-      ans.push_back(make_pair(l,r));
-      l = LR[i].first;
-      r = LR[i].second;
-    }else{
-      if(r < tem_r){
-        r = tem_r;
-      }
-    }
-    if (i + 1 == n)
+  for(auto [l,r] : LR){
+    if (ans.size() == 0 || ans.back().second < l)
     {
-      ans.push_back(make_pair(l, r));
+      ans.push_back(make_pair(l,r));
     }
-    // cout << l << " " << r << endl;
-
+    else
+    {
+      chmax(ans.back().second, r);
+    }
   }
-  for (int i = 0; i < ans.size(); i++)
-  {
-    cout << ans[i].first << " " << ans[i].second << endl;
-  }
-  
 
-  return 0;
+  for(auto [l,r] : ans){
+    cout << l << " " << r << endl;
+  }
+  return 0; 
 }
