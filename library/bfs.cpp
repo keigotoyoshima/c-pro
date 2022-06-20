@@ -6,7 +6,7 @@ using Graph = vector<vector<int>>;
 
 int main() {
     int n, m; cin >> n >> m;
-    Graph g(n);
+    vector<vector<int>> g(n);
     for (int i = 0; i < m; ++i) {
         int a, b;
         cin >> a >> b;
