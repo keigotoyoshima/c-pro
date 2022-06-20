@@ -5,15 +5,14 @@ using namespace std;
 
 
 // 深さ優先探索
-using Graph = vector<vector<int>>;
 vector<bool> seen;
-Graph G;
+vector<vector<int>> G;
 
 void dfs(int v) {
     seen[v] = true; 
     for (auto nv : G[v]) { 
         if (seen[nv]) continue; 
-        dfs(G, nv); 
+        dfs(nv); 
     }
 }
 
@@ -26,6 +25,7 @@ int main() {
         G[a].push_back(b);
     }
     seen.assign(N, false); 
+    // s == startのindex
     dfs(s);
     if (seen[t]) cout << "Yes" << endl;
     else cout << "No" << endl;
