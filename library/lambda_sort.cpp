@@ -25,16 +25,6 @@ int main(){
     }
   });
 
-
-  // template用
-  sort(V.begin(), V.end(), [&](auto l, auto r) {
-    if(V[l] == V[r]){
-      return V[l] < V[r];
-    }else{
-      return V[l] < V[r];
-    }
-  });
-
   for (int i = 0; i < v.size(); i++)
   {
     cout << v[i] << " ";
