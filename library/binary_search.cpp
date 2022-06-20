@@ -9,7 +9,7 @@ bool isOK(int index, int key) {
 // keyを基準としてkey以上のindexを返す．左端を-1，右端をa.size()にしていることに注意
 int binary_search(int key) {
     int ng = -1;
-    int ok = (int)a.size();
+    int ok = a.size();
 
     while (abs(ok - ng) > 1) {
         int mid = (ok + ng) / 2;
