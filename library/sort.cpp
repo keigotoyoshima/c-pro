@@ -39,6 +39,8 @@ const int dy[] = {0, 1, 0, -1};
 const int dx8[] = {-1, -1, 0, 1, 1, 1, 0, -1};
 const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
+
+
 vector<pair<int, int>> sort1(vector<pair<int, int>> &V)
 {
   sort(V.begin(), V.end(), [&](auto l, auto r) {
@@ -51,10 +53,11 @@ vector<pair<int, int>> sort1(vector<pair<int, int>> &V)
   return V;
 }
 
-
-
 // pair-vectorに対するsort
 vector<pair<int, int>> pair_list;
+// まとめ
+// デフォルトでは，firstで昇順sortされ，firstが同じ場合は，secondで昇順sortされる．
+// secondで降順sortしたい場合は，lambdaソートする必要あり．
 
 
 int main()
