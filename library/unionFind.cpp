@@ -9,14 +9,17 @@
 #include <math.h>
 using namespace std;	
 using ll = long long;
+// 問題abc157 d
 
 // https://esakat.github.io/esakat-blog/posts/about-union-find/
 // union by size による実装
 // 「各連結成分のサイズ」も自然に取得できる
 struct UnionFind {
     vector<int> par;
-    
-    UnionFind(int n) : par(n, -1) { }
+
+    // constructor
+    UnionFind(int n) : par(n, -1) {}
+    // initialize
     void init(int n) { par.assign(n, -1); }
     
     int root(int x) {
@@ -24,7 +27,7 @@ struct UnionFind {
         else return par[x] = root(par[x]);
     }
     
-    bool issame(int x, int y) {
+    bool isSame(int x, int y) {
         return root(x) == root(y);
     }
     
