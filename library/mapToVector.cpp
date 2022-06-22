@@ -47,7 +47,7 @@ int main()
   int n; cin >> n;
   // 実際の値を二次元配列に保持
   vector<vector<int>> v;
-  // vのindexを保持(つまり，id->pair) pair(index, indexの進行状況)
+  // map<id,<index,indexの進行状況)
   map<int, pair<int,int>> mp;
 
   for (int i = 0; i < n; i++)
@@ -59,8 +59,6 @@ int main()
     if (mp.find(id) != mp.end())
     {
       v[mp[id].first].push_back(value);
-      --i;
-      --n;
     }
     else
     {
@@ -78,11 +76,6 @@ int main()
   // 4 2
   // 1 3
 
-  cout << "n " << n << endl;
-  // 3
-  cout << "v.size() " << v.size() << endl;
-  // 3
-
   cout << "mp" << endl;
   for (auto itr = mp.begin(); itr != mp.end(); ++itr)
   {
@@ -90,9 +83,10 @@ int main()
     pair<int,int> b = itr->second;
     cout << a << " " << b.first << endl;
   }
-// 1 2
-// 3 1
-// 4 0
+  // id index
+  // 1 2
+  // 3 1
+  // 4 0
 
   cout << "v" << endl;
   for (int i = 0; i < v.size(); i++)
