@@ -35,62 +35,30 @@ int main(){
     }
   }
 
-  int maxValue = 0;
-  int currentX;
-  int currentY;
+  ll ans = 0;
   for (int i = 0; i < n; i++)
   {
     for (int j = 0; j < n; j++)
     {
-      int temMax = maxValue;
-      chmax(maxValue,A[i][j]);
-      if(temMax != maxValue){
-        currentX = i;
-        currentY = j;
+      int si = i; int sj = j;
+      for (int k = 0; k < 8; k++)
+      {
+        ll V = 0;
+        for (int p = 0; p < n; p++)
+        {
+          V = V*10 + A[si][sj];
+          si += dx8[k];
+          sj += dy8[k];
+          si = (si+n)%n;
+          sj = (sj+n)%n;
+        }
+        chmax(ans, V);
       }
+      
     }
   }
 
-  int next_current_x = currentX;
-  int next_current_y = currentY;
-  int next_x;
-  int next_y;
-  int pre_x;
-  int pre_y;
-
-  vector<int>ans;
-  ans.push_back(maxValue);
-  for (int i = 0; i < n-1; i++)
-  {
-    maxValue = 0;
-    currentX = next_current_x;
-    currentY = next_current_y;
-  
-    for (int j = 0; j < 8; j++)
-    {
-      next_x = (currentX + dx8[j] + n)%n;
-      next_y = (currentY + dy8[j] + n)%n;
-      if(next_x == pre_x && next_y == pre_y){
-        continue;
-      } 
-      int temMax = maxValue;
-      chmax(maxValue, A[next_x][next_y]);
-      if(temMax != maxValue){
-        next_current_x = next_x;
-        next_current_y = next_y;
-      }
-     
-    }
-    pre_x = currentX;
-    pre_y = currentY;
-    ans.push_back(maxValue);
-    
-  }
-
-  for(auto v: ans){
-    cout << v;
-  }
-  cout << endl;
+  cout << ans << endl;
   
   return 0;
 }
