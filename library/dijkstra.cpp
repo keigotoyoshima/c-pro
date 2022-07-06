@@ -36,18 +36,17 @@ int n, m, k, s, x, a, b;
 
 void dijkstra(int start)
 {
-  // <仮の最小dist, 頂点番号>
-  priority_queue<P, vector<P>, greater<P>> pq;
+  // <頂点番号>
+  priority_queue<int, vector<int>, greater<int>> pq;
   fill(dist, dist + 108000, INF);
 
   dist[start] = 0;
-  pq.push(P(0, start));
+  pq.push(start);
 
   while (!pq.empty())
   {
-    P tmp = pq.top();
+    int from = pq.top();
     pq.pop();
-    int from = tmp.second;
 
     for (int i = 0; i < edge[from].size(); i++)
     {
@@ -61,7 +60,7 @@ void dijkstra(int start)
       if (dist[to] > dist[from] + cost)
       {
         dist[to] = dist[from] + cost;
-        pq.push(P(dist[to], to));
+        pq.push(to);
       }
     }
   }
@@ -106,9 +105,6 @@ int main()
       }
     }
   }
-
-
-
 
   dijkstra(1);
 
