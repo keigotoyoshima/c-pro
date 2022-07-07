@@ -27,7 +27,7 @@ using P = pair<int, int>;
 // 幅優先とダイクストラを使って解く問題
 // https://atcoder.jp/contests/joi2016yo/tasks/joi2016yo_e
 
-vector<int> edge[108000];
+vector<int> path[108000];
 ll dist[108000];
 bool zombie[108000];
 bool danger[108000];
@@ -48,9 +48,9 @@ void dijkstra(int start)
     int from = pq.top();
     pq.pop();
 
-    for (int i = 0; i < edge[from].size(); i++)
+    for (int i = 0; i < path[from].size(); i++)
     {
-      int to = edge[from][i];
+      int to = path[from][i];
       // この問題特有---
       if (zombie[to]) continue;
       int cost = pcost;
@@ -72,7 +72,7 @@ int main()
   cin >> n >> m >> k >> s;
   cin >> pcost >> qcost;
 
-  // ゾンビの街
+  // ゾンビの街-----
   queue<int> q;
 
   for (int i = 0; i < k; i++)
@@ -81,14 +81,16 @@ int main()
     zombie[x] = true;
     q.push(x);
   }
-
+  // ---------
+  // path入力
   for (int i = 0; i < m; i++)
   {
     cin >> a >> b;
-    edge[a].push_back(b);
-    edge[b].push_back(a);
+    path[a].push_back(b);
+    path[b].push_back(a);
   }
-
+  
+  // 危険な街をbfsで特定
   for (int i = 0; i <= s; i++)
   {
     if (q.empty()) break;
@@ -99,9 +101,9 @@ int main()
       q.pop();
       if (danger[from]) continue;
       danger[from] = true;
-      for (int k = 0; k < edge[from].size(); k++)
+      for (int k = 0; k < path[from].size(); k++)
       {
-        q.push(edge[from][k]);
+        q.push(path[from][k]);
       }
     }
   }
