@@ -25,6 +25,7 @@ using P = pair<int, int>;
 
 
 // 幅優先とダイクストラを使って解く問題
+// 計算量 O(n^2)
 // https://atcoder.jp/contests/joi2016yo/tasks/joi2016yo_e
 
 vector<int> path[108000];
