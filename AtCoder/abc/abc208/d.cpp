@@ -13,8 +13,26 @@
 #include <assert.h>
 using namespace std;
 using ll = long long;
-template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; } return 0; }
-template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
+template <class T>
+inline bool chmax(T &a, T b)
+{
+  if (a < b)
+  {
+    a = b;
+    return 1;
+  }
+  return 0;
+}
+template <class T>
+inline bool chmin(T &a, T b)
+{
+  if (a > b)
+  {
+    a = b;
+    return 1;
+  }
+  return 0;
+}
 const long long INF = 1LL << 60;
 int inf_int = 2147483647;
 const int dx[] = {-1, 0, 1, 0};
@@ -23,7 +41,7 @@ const int dx8[] = {-1, -1, 0, 1, 1, 1, 0, -1};
 const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
 ll sum = 0;
-void warshall_floyd(int n, vector<vector<ll>>&dp)
+void warshall_floyd(int n, vector<vector<ll>> &dp)
 {
   for (int k = 0; k < n; k++)
   { // 経由する頂点
@@ -32,11 +50,9 @@ void warshall_floyd(int n, vector<vector<ll>>&dp)
       for (int j = 0; j < n; j++)
       { // 終点
         dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
-        // この問題特有------
         if (dp[i][j] == INF)
           continue;
         sum += dp[i][j];
-        // -----------
       }
     }
   }
@@ -47,7 +63,8 @@ void warshall_floyd(int n, vector<vector<ll>>&dp)
 // https://atcoder.jp/contests/abc208/tasks/abc208_d
 int main()
 {
-  int n, m; cin >> n >> m;
+  int n, m;
+  cin >> n >> m;
   vector<vector<ll>> dp(n, vector<ll>(n, INF));
   for (int i = 0; i < n; i++)
   {
@@ -55,17 +72,16 @@ int main()
   }
   for (int i = 0; i < m; i++)
   {
-    int a,b,c; cin >> a >> b >> c;
-    --a;--b;
+    int a, b, c;
+    cin >> a >> b >> c;
+    --a;
+    --b;
     dp[a][b] = c;
-  } 
+  }
 
-
-  warshall_floyd(n,dp);
-
+  warshall_floyd(n, dp);
 
   cout << sum << endl;
 
-  
   return 0;
 }
