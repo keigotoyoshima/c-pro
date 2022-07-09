@@ -122,7 +122,7 @@ int main()
     // s＝midの時,全てのジャンプ台を経由できるか判定
     bool flag = [&]
     {
-      vector<vector<ll>> dp(n, vector<ll>(n, INF));
+      vector<vector<ll>> dp(n, vector<ll>(n, 0));
       // 全てのジャンプ台の組み合わせの有効グラフを作成
       for (int i = 0; i < n; i++)
       {
@@ -133,8 +133,7 @@ int main()
         {
           ll xj = x[j];
           ll yj = y[j];
-          if (psx >= abs(xi - xj) + abs(yi - yj))
-            dp[i][j] = 1;
+          if (psx >= abs(xi - xj) + abs(yi - yj)) dp[i][j] = 1;
         }
       }
 
@@ -145,16 +144,18 @@ int main()
         { // 始点
           for (int j = 0; j < n; j++)
           { // 終点
-            dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
+            // dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
+            dp[i][j] |= dp[i][k]&dp[k][j];
           }
         }
       }
+
       for (int i = 0; i < n; i++)
       {
         bool flag = true;
         for (int j = 0; j < n; j++)
         {
-          if(dp[i][j] == INF) flag = false;
+          if(dp[i][j] != 1) flag = false;
         }
         if(flag) return true;
       }
