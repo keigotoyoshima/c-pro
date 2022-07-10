@@ -13,6 +13,8 @@
 #include <assert.h>
 using namespace std;
 using ll = long long;
+#define fi first
+#define se second
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
 const long long INF = 1LL << 60;
@@ -26,36 +28,39 @@ const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
 
 
+using P = pair<ll,ll>;
+
 int main(){
   int n; cin >> n;
-  pair<ll,ll>S;
-  pair<ll,ll>T;
+  P S;
+  P T;
   ll sx, sy;
   cin >> sx >> sy;
   S=make_pair(sx, sy);
   ll tx, ty;
   cin >> tx >> ty;
   T=make_pair(tx,ty);
-  vector<ll>X(n);
-  vector<ll>Y(n);
+  vector<P>XY(n);
   vector<ll>R(n);
   for (int i = 0; i < n; i++)
   {
-    cin >> X[i] >> Y[i] >> R[i];
+    cin >> XY[i].fi >> XY[i].se >> R[i];
   }
+
+  auto pow2 = [=](ll x){return x*x;};
+  auto dist = [=](P a, P b){
+    return pow2(a.fi-b.fi) + pow2(a.se-b.se);
+  };
   // S,Tがどの円なのか
   int s_index = inf_int;
   int t_index = inf_int;
   for (int i = 0; i < n; i++)
   {
-   ll x = X[i]; ll y = Y[i]; ll r = R[i];
-   if (r * r == (S.first - x) * (S.first - x) + (S.second - y) * (S.second - y)){
-     s_index = i;
-   }
-   if (r * r == (T.first - x) * (T.first - x) + (T.second - y) * (T.second - y))
-   {
-     t_index = i;
-   }
+   ll r = R[i];
+   if (pow2(r) == dist(S,XY[i])) s_index = i;
+  
+   if (pow2(r) == dist(T,XY[i])) t_index = i;
+   
    if(s_index != inf_int && t_index != inf_int) break;
   }
 
@@ -67,19 +72,19 @@ int main(){
     {
       ll dif = abs(R[i] - R[j]);
       ll plus = R[i] + R[j];
-      ll disy = Y[i] - Y[j];
-      ll disx = X[i] - X[j];
+      ll disy = XY[i].se - XY[j].se;
+      ll disx = XY[i].fi - XY[j].fi;
       ll dis = disy*disy + disx*disx;
-      if(dif*dif <= dis && dis <= plus*plus) {
+      if(pow2(dif) <= dis && dis <= pow2(plus)) {
         dp[i][j] = 1;
       }
     }
   }
 
 
-  vector<int> dist(n, -1);
+  vector<int> dist_bfs(n, -1);
   queue<int> que;
-  dist[s_index] = 0;
+  dist_bfs[s_index] = 0;
   que.push(s_index);
   while (!que.empty())
   {
@@ -92,15 +97,15 @@ int main(){
       ll nv = i;
       if (value == 0)
         continue;
-      if (dist[nv] != -1)
+      if (dist_bfs[nv] != -1)
         continue;
-      dist[nv] = dist[v] + 1;
+      dist_bfs[nv] = dist_bfs[v] + 1;
       que.push(nv);
     }
   }
 
 
-  if(dist[t_index] != -1){
+  if(dist_bfs[t_index] != -1){
     cout << "Yes" << endl;
   }else{
     cout << "No" << endl;
