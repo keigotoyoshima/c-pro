@@ -30,6 +30,38 @@ const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
 using P = pair<ll,ll>;
 
+struct UnionFind {
+    vector<int> par;
+
+    // constructor
+    UnionFind(int n) : par(n, -1) {}
+    // initialize
+    void init(int n) { par.assign(n, -1); }
+    
+    int root(int x) {
+        if (par[x] < 0) return x;
+        else return par[x] = root(par[x]);
+    }
+    
+    bool isSame(int x, int y) {
+        return root(x) == root(y);
+    }
+    
+    bool merge(int x, int y) {
+        x = root(x); y = root(y);
+        if (x == y) return false;
+        if (par[x] > par[y]) swap(x, y); // merge technique
+        par[x] += par[y];
+        par[y] = x;
+        return true;
+    }
+    
+    int size(int x) {
+        return -par[root(x)];
+    }
+};
+
+
 int main(){
   int n; cin >> n;
   P S;
@@ -65,7 +97,9 @@ int main(){
   }
 
   // 有効グラフ作成
-  vector<vector<int>>dp(n,vector<int>(n, 0));
+  vector<vector<int>>dp(n,vector<int>(n, 0));  
+  UnionFind uf(n);
+
   for (int i = 0; i < n; i++)
   { 
     for (int j = 0; j < n; j++)
@@ -77,39 +111,45 @@ int main(){
       ll dis = disy*disy + disx*disx;
       if(pow2(dif) <= dis && dis <= pow2(plus)) {
         dp[i][j] = 1;
+        uf.merge(i,j);
       }
     }
   }
-
-
-  vector<int> dist_bfs(n, -1);
-  queue<int> que;
-  dist_bfs[s_index] = 0;
-  que.push(s_index);
-  while (!que.empty())
-  {
-    int v = que.front();
-    que.pop();
-    
-    for (int i = 0; i < n; i++)
-    {
-      ll value = dp[v][i];
-      ll nv = i;
-      if (value == 0)
-        continue;
-      if (dist_bfs[nv] != -1)
-        continue;
-      dist_bfs[nv] = dist_bfs[v] + 1;
-      que.push(nv);
-    }
-  }
-
-
-  if(dist_bfs[t_index] != -1){
+  // union-findでの解法
+  if(uf.isSame(s_index,t_index)){
     cout << "Yes" << endl;
   }else{
     cout << "No" << endl;
   }
+  // bfs
+  // vector<int> dist_bfs(n, -1);
+  // queue<int> que;
+  // dist_bfs[s_index] = 0;
+  // que.push(s_index);
+  // while (!que.empty())
+  // {
+  //   int v = que.front();
+  //   que.pop();
+    
+  //   for (int i = 0; i < n; i++)
+  //   {
+  //     ll value = dp[v][i];
+  //     ll nv = i;
+  //     if (value == 0)
+  //       continue;
+  //     if (dist_bfs[nv] != -1)
+  //       continue;
+  //     dist_bfs[nv] = dist_bfs[v] + 1;
+  //     que.push(nv);
+  //   }
+  // }
+
+
+  // if(dist_bfs[t_index] != -1){
+  //   cout << "Yes" << endl;
+  // }else{
+  //   cout << "No" << endl;
+  // }
 
   return 0;
 }
