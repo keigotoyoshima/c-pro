@@ -28,11 +28,12 @@ int main() {
   int S;
   cin >> S;
   vector<ll> dp(S+1, 0);
+  vector<ll> cum(S+2, 0);
   dp[0] = 1;
+  cum[1] = 1;
   for (int v = 1; v <= S; ++v) {
-    for (int d = 0; d <= v - 3; ++d){
-      dp[v] += (dp[d])%mod;
-    } 
+    if(v >= 2) dp[v] = (cum[v - 2]) % mod;
+    cum[v + 1] = cum[v] + dp[v];
   }
   // for (int i = 0; i <= S; i++)
   // {
