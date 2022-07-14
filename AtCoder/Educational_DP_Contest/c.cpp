@@ -1,83 +1,80 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
-#include <algorithm>
 #include <map>
 #include <set>
 #include <algorithm>
 #include <numeric>
 #include <queue>
+#include <deque>
 #include <cmath>
-#include<math.h>
+#include <math.h>
+#include <string>
+#include <assert.h>
 using namespace std;
 using ll = long long;
+#define fi first
+#define se second
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
-const long long INFL = 1LL << 60;
-const ll inf_ll = 1e15;
+const long long INF = 1LL << 60;
 int inf_int = 2147483647;
-using mpair = pair<int,int>;
 const int dx[] = {-1, 0, 1, 0};
 const int dy[] = {0, 1, 0, -1};
 const int dx8[] = {-1, -1, 0, 1, 1, 1, 0, -1};
 const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
-vector<int>a;
-vector<int>b;
-vector<int>c;
-ll dp[100100][3];
 
-void tran(int i){
-  // pは前日に何を選んだか．
-  // kはi日目に何を選んだか．
-  for (int p = 0; p < 3; p++)
-  {
-    for (int k = 0; k < 3; k++)
-    {
-      if(p == k) continue;
-      if(k==0){
-        chmax(dp[i+1][k], dp[i][p] + a[i]);
-      }else if(k==1){
-        chmax(dp[i+1][k], dp[i][p] + b[i]);
-      }else{
-        chmax(dp[i+1][k], dp[i][p] + c[i]);
-      }
-      
-    }
-  }
-  
 
-  
- 
-}
+
 
 int main(){
   int n; cin >> n;
-  a.resize(n);
-  b.resize(n);
-  c.resize(n);
+  vector<vector<int>>data(n);
+  vector<int> a(n);
+  vector<int> d(n);
+  vector<int> c(n);
   for (int i = 0; i < n; i++)
   {
-    cin >> a[i] >> b[i] >> c[i];
+    int a, b, c; cin >> a >> b >> c;
+    data[i].push_back(a);
+    data[i].push_back(b);
+    data[i].push_back(c);
+    // cin >> a[i] >> b[i] >> c[i];
   }
-  // dp[i][b]の定義
-  // i-1日目にbを選んだ時の，幸福度
-  
-  for (int i = 0; i < n; i++)
-  {
-    tran(i);
-    tran(i);
-    tran(i);
-  }
+  vector<vector<ll>>dp(n + 1,vector<ll>(3,0));
+  dp[0][0] = data[0][0];
+  dp[0][1] = data[0][1];
+  dp[0][2] = data[0][2];
 
+  for (int i = 0; i < n-1; i++)
+  {
+
+    // j=配る側のabc
+    for (int j = 0; j < 3; j++)
+    {
+      // k=貰う側のabc
+      for (int k = 0; k < 3; k++)
+      {
+        if(j==k) continue;
+        chmax(dp[i+1][k], (ll)dp[i][j] + data[i+1][k]);
+      }  
+    } 
+  }
 
   ll ans = 0;
-  
   for (int i = 0; i < 3; i++)
   {
-    chmax(ans, dp[n][i]);
+    chmax(ans, (ll)dp[n-1][i]);
   }
+
+  // for(auto v: )
+
   cout << ans << endl;
+  
+
+
+  
 
   return 0;
 }
