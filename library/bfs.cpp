@@ -21,8 +21,7 @@ int main() {
         int v = que.front(); 
         que.pop();
         for(int i = 0; i < n ; i++){
-            int nv = i;
-            int value = g[v][i];
+            int nv = g[v][i];
             if(dist[nv] != -1) continue;
             dist[nv] = dist[v] + 1;
             que.push(nv);
