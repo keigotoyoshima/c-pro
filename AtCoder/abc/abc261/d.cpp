@@ -30,7 +30,7 @@ map<int, int> mp;
 vector<ll> X;
 vector<pair<ll, ll>> CY;
 vector<ll>b;
-
+//メモ化再起でできないか検討
 // dp[i][j] = i回コイントスして，連続表回数がjの時の得られる最大金額
 // ll dp[5100][5100];
 
