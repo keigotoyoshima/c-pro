@@ -30,26 +30,6 @@ map<int, int> mp;
 vector<ll> X;
 vector<pair<ll, ll>> CY;
 vector<ll>b;
-//メモ化再起でできないか検討
-// dp[i][j] = i回コイントスして，連続表回数がjの時の得られる最大金額
-// ll dp[5100][5100];
-
-// ll rec(int i, int j){
-//   if(dp[i][j] != -1) return dp[i][j];
-//   ll maxV = 0;
-//   ll right = rec(i+1, j+1);
-//   ll left = rec(i+1, 0);
-//   chmax(maxV, max(right,left));
-
-//   auto itr = mp.find(j);
-//   if(itr != mp.end()) maxV += CY[mp[j]];
-//   maxV += X[i-1];
-
-//   // rec(i - 1, j + 1);
-//   // rec(i - 1, 0);
-
-//   return dp[i][j] = maxV;
-// }
 
 int main(){
   int n, m;
