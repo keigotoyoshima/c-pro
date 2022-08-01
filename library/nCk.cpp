@@ -76,17 +76,17 @@ int main()
 // 1,3,4
 // 2,3,4
 
-ll nCk(int n, int k)
-{
-  ll x = 1; 
-  ll y = 1; 
-  ll z = 1;
+// ll nCk(int n, int k)
+// {
+//   ll x = 1; 
+//   ll y = 1; 
+//   ll z = 1;
 
-  for (int i = 0; i < n; i++)
-    x *= n - i;
-  for (int i = 0; i < n-k; i++)
-    y *= n - k - i;
-  for (int i = 0; i < k; i++)
-    z *= k - i;
-  return (x / (y * z)); 
-}
+//   for (int i = 0; i < n; i++)
+//     x *= n - i;
+//   for (int i = 0; i < n-k; i++)
+//     y *= n - k - i;
+//   for (int i = 0; i < k; i++)
+//     z *= k - i;
+//   return (x / (y * z)); 
+// }
