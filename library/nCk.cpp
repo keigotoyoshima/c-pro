@@ -35,6 +35,7 @@ void recursive_comb(int *indexes, int s, int rest, function<void(int *)> f)
 {
   if (rest == 0)
   {
+    cnt++;
     f(indexes);
   }
   else
@@ -61,6 +62,8 @@ int main()
   // f=組み合わせ列挙関数(indexesに組み合わせが入ってくる)
   foreach_comb(5, 3, [](int *indexes)
                { std::cout << indexes[0] << ',' << indexes[1] << ',' << indexes[2] << std::endl; });
+  
+  cout << cnt << endl;
 }
 // 0,1,2
 // 0,1,3
@@ -72,3 +75,16 @@ int main()
 // 0,3,4
 // 1,3,4
 // 2,3,4
+
+ll nCk(int n, int k)
+{
+  ll x = 1; 
+  ll y = 1; 
+  ll z = 1; 
+
+  rep(i, n) x *= n - i;         
+  rep(i, n - k) y *= n - k - i; 
+  rep(i, k) z *= k - i;         
+
+  return (x / (y * z)); 
+}
