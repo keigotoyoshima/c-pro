@@ -32,6 +32,7 @@ vector<int> k;
 void fun(vector<ll>a, int x, int n){
   vector<int> v(n);
   iota(v.begin(), v.end(), 0);
+  // 同じだった時の処理を明記する
   sort(v.begin(), v.end(), [&](auto l, auto r){ 
     if(a[l] != a[r]) return a[l] > a[r]; 
     return l < r;
