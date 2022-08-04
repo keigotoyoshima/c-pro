@@ -43,7 +43,6 @@ void fun(vector<ll>a, int x, int n){
   {
     if(a.size() == index) break;
     if (k[v[index]] != 1){
-      // k[v[index]] = true;
       k[v[index]] = 1;
       --x;
     }
