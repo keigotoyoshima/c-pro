@@ -27,7 +27,7 @@ const int dy[] = {0, 1, 0, -1};
 const int dx8[] = {-1, -1, 0, 1, 1, 1, 0, -1};
 const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
-
+// next_permutationの組み合わせversion
 
 // 頭の中で樹形図思い描けば理解できた．
 // s==現在のindex
