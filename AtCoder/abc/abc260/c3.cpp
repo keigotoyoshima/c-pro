@@ -28,27 +28,21 @@ const int dy[] = {0, 1, 0, -1};
 const int dx8[] = {-1, -1, 0, 1, 1, 1, 0, -1};
 const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
-ll N, X, Y;
-
-ll r[13];
-ll b[13];
-// 再帰関数での解法
-ll rec(ll level, ll is_red){
-  if(level == 1) return is_red ? 0 : 1;
-  if(is_red){
-    if(r[level] != -1) return r[level];
-    return r[level] = rec(level-1, true) + rec(level, false) * X;
-  }else{
-    if(b[level] != -1) return b[level];
-    return b[level] = rec(level-1, true) + rec(level-1, false) * Y;
-  }
-}
-
-int main(){
+long long N, X, Y, r[12], b[12];
+// 素直に解く
+int main()
+{
   cin >> N >> X >> Y;
-  memset(r,-1,sizeof(r));
-  memset(b,-1,sizeof(b));
-  ll blue = rec(N, true);
-  cout << blue << endl;
+  r[N] = 1;
+  for (int i = N; i > 1; i--)
+  {
+    r[i - 1] += r[i];
+    b[i] += r[i] * X;
+    r[i - 1] += b[i];
+    b[i - 1] += b[i] * Y;
+  }
+
+  cout << b[1] << endl; 
+
   return 0;
 }
