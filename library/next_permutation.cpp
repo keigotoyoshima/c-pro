@@ -28,20 +28,20 @@ const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 #define se second
 
 
-int main(){
-  int n = 5;
-  vector<int> v(n);
-  // 第3引数は、v[0]の値
-  iota(v.begin(), v.end(), 1);  
+// int main(){
+//   int n = 5;
+//   vector<int> v(n);
+//   // 第3引数は、v[0]の値
+//   iota(v.begin(), v.end(), 1);  
 
-  do{
-      for(int i=0; i<n; i++){
-        cout << v[i] << " ";
-      }
-      cout << endl;
-    }while(next_permutation(v.begin(),v.end()));
-  return 0;
-}
+//   do{
+//       for(int i=0; i<n; i++){
+//         cout << v[i] << " ";
+//       }
+//       cout << endl;
+//     }while(next_permutation(v.begin(),v.end()));
+//   return 0;
+// }
 
 // 1 2 3 4 5
 // 1 2 3 5 4
@@ -57,3 +57,22 @@ int main(){
 // 1 3 5 4 2
 // 1 4 2 3 5
 // 1 4 2 5 3 .....
+
+int main()
+{
+  vector<int> v = {0, 1, 1};
+
+  do
+  {
+    for (int i = 0; i < 3; i++)
+    {
+      cout << v[i] << " ";
+    }
+    cout << endl;
+  } while (next_permutation(v.begin(), v.end()));
+  return 0;
+}
+
+// 0 1 1 
+// 1 0 1 
+// 1 1 0 
