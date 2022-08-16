@@ -71,8 +71,8 @@ struct UnionFind
 
 vector<vector<int>> a;
 
-int dp[110000][2];
-bool flag[110000];
+int dp[100010][2];
+bool flag[100010];
 
 void f(int node){
   // 後戻り防止
@@ -86,7 +86,9 @@ void f(int node){
       f(v);
       // 0が白,1が黒
       dp[node][0] *= (dp[v][1] + dp[v][0]) % MOD;
-      dp[node][1] *= dp[v][0] % MOD;
+      dp[node][0] %= MOD;
+      dp[node][1] *= dp[v][0];
+      dp[node][1] %= MOD;
     }
   }
   // cout << "node " << node << endl;
