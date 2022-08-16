@@ -71,7 +71,7 @@ struct UnionFind
 
 vector<vector<int>> a;
 
-int dp[100010][2];
+ll dp[100010][2];
 bool flag[100010];
 
 void f(int node){
