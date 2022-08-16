@@ -95,6 +95,8 @@ void f(int node){
   // cout << dp[node][0] << " : " << dp[node][1] << endl;
 }
 
+
+// 木DP
 int main(){ 
   int n; cin >> n;
   a.resize(n);
