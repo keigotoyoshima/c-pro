@@ -35,7 +35,8 @@ https://algo-logic.info/segment-tree/#toc_id_1_1
 配列の i 番目が表すノードdat[i]の親
 親 : dat[(i-1)/2]
 /* RMQ：[0,n-1] について、区間ごとの最小値を管理する構造体
-    set(int i, T x), build(): i番目の要素をxにセット。まとめてセグ木を構築する。O(n)
+    set(int i, T x), i番目の要素をxにセット。O(1)
+    build(): まとめてセグ木を構築する。O(n)
     update(i,x): i 番目の要素を x に更新。O(log(n))
     query(a,b): [a,b) での最小の要素を取得。O(log(n))
     find_rightest(a,b,x): [a,b) で x以下の要素を持つ最右位置を求める。O(log(n))
@@ -149,5 +150,15 @@ struct RMQ
 
 // Range Minimum Query
 int main(){
+  int N = 8;
+  RMQ <int> segtree(N);
+  vector<int> a = {3,5,2,11,9,50,20,8};
+  for(int i = 0; i < N; i++){
+    segtree.set(i, a[i]);
+  }
+  segtree.build();
+  int ans = segtree.query(0,8);
+  cout << ans << endl;
+  // 2
   return 0;
 }
