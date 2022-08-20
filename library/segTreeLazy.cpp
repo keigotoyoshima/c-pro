@@ -103,6 +103,19 @@ struct SegTreeLazy {
         }
     }
     X query(int a, int b) { return query_sub(a, b, 0, 0, n); }
+
+    /* debug */
+    inline X operator[](int a) { return query(a, a + 1); }
+    void print()
+    {
+        for (int i = 0; i < n; ++i)
+        {
+            cout << (*this)[i];
+            if (i != n-1)
+                cout << ",";
+        }
+        cout << endl;
+    }
 };
 
 // 区間更新型のRMQを構築
@@ -127,5 +140,6 @@ int main(){
   int ans = seg.query(0,8);
   cout << ans << endl;
   // 2
+  seg.print();
   return 0;
 }
