@@ -113,6 +113,7 @@ auto fa = [](X x, M m) -> X { return m; };
 auto fm = [](M m1, M m2) -> M { return m2; };
 int ex = numeric_limits<int>::max();
 int em = numeric_limits<int>::max();
+// SegTreeLazy<X, M> seg(n, fx, fa, fm, ex, em);
 
 // Range Minimum Query
 int main(){
