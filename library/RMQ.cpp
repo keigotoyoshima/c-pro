@@ -146,6 +146,18 @@ struct RMQ
       }
     }
   }
+  /* debug */
+  inline T operator[](int a) { return query(a, a + 1); }
+  void print()
+  {
+    for (int i = 0; i < n; ++i)
+    {
+      cout << (*this)[i];
+      if (i != n)
+        cout << ",";
+    }
+    cout << endl;
+  }
 };
 
 // Range Minimum Query
