@@ -1,15 +1,8 @@
 // greatest common divisor
 // ユークリッドの互除法
-int gcd(int a, int b)
+int GCD(int a, int b)
 {
-  if (a % b == 0)
-  {
-    return b;
-  }
-  else
-  {
-    return gcd(b, a % b);
-  }
+  return b ? GCD(b, a % b) : a;
 }
 
 // least common multiple
