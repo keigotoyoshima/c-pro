@@ -17,10 +17,15 @@ struct SegTreeLazy {
     using FA = function<X(X, M)>;
     using FM = function<M(M, M)>;
     int n;
+    // 左と右の情報から親を更新する関数
     FX fx;
+    // eval時に自身を更新する関数(葉に伝搬後)
     FA fa;
+    // lazyに保留する関数
     FM fm;
+    // datの初期値
     const X ex;
+    // lazyの初期値
     const M em;
     vector<X> dat;
     vector<M> lazy;
