@@ -17,15 +17,10 @@ struct SegTreeLazy {
     using FA = function<X(X, M)>;
     using FM = function<M(M, M)>;
     int n;
-    // 左と右の情報から親を更新する関数
     FX fx;
-    // eval時に自身を更新する関数(葉に伝搬後)
     FA fa;
-    // lazyに保留する関数
     FM fm;
-    // datの初期値
     const X ex;
-    // lazyの初期値
     const M em;
     vector<X> dat;
     vector<M> lazy;
@@ -97,10 +92,15 @@ struct SegTreeLazy {
 // 区間更新型のRMQを構築
 using X = int;
 using M = int;
+// 左と右の情報から親を更新する関数
 auto fx = [](X x1, X x2) -> X { return min(x1, x2); };
+// eval時に自身を更新する関数(葉に伝搬後)
 auto fa = [](X x, M m) -> X { return m; };
+// lazyに保留する関数
 auto fm = [](M m1, M m2) -> M { return m2; };
+// datの初期値
 int ex = numeric_limits<int>::max();
+// lazyの初期値
 int em = numeric_limits<int>::max();
 // SegTreeLazy<X, M> seg(n, fx, fa, fm, ex, em);
 
