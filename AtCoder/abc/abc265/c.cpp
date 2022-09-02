@@ -29,96 +29,49 @@ const int dx8[] = {-1, -1, 0, 1, 1, 1, 0, -1};
 const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
 
-vector<vector<char>>G;
-vector<vector<bool>> memo;
-const int u[] = {-1,0};
-const int d[] = {1, 0};
-const int l[] = {0, -1};
-const int r[] = {0,  1};
-
-int h, w;
-
-bool judge(int i, int j){
-  bool flag = true;
-  if (i >= h || i <= -1 || j >= w || j <= -1)
-    flag = false;
-
-  return flag;
-}
 
 int main(){
+  int h, w;
   cin >> h >> w;
-  G.resize(h, vector<char>(w,'1'));
-  memo.resize(h, vector<bool>(w, false));
+  vector<vector<char>> G(h, vector<char>(w,'1'));
+  vector<vector<bool>> memo(h, vector<bool>(w, false));
+
   for (int i = 0; i < h; i++)
   {
     for (int j = 0; j < w; j++)
     {
       cin >> G[i][j];
     }
-    
   }
 
   bool flag = true;
   bool roop = false;
   int i = 0; int j = 0;
-  while(flag){
+  while(1){
     char tem = G[i][j];
     if(memo[i][j]){
       roop = true;
       break;
     }
-    memo[i][j] = true;
-    int next_i = i;
-    int next_j = j;
-    if (tem == 'U')
-    {
-      next_i += u[0];
-      next_j += u[1];
-      if(judge(next_i,next_j)){
-        i += u[0];
-        j += u[1];
-      }else{
-        break;
-      }
-    }
-    else if (tem == 'D')
-    {
-      next_i += d[0];
-      next_j += d[1];
-      if(judge(next_i,next_j)){
-        i += d[0];
-        j += d[1];
-      }else{
-        break;
-      }
-    }
-    else if (tem == 'L')
-    {
-      next_i += l[0];
-      next_j += l[1];
-      if(judge(next_i,next_j)){
-        i += l[0];
-        j += l[1];
-      }else{
-        break;
-      }
-    }
-    else if (tem == 'R')
-    {
-      next_i += r[0];
-      next_j += r[1];
-      if(judge(next_i,next_j)){
-        i += r[0];
-        j += r[1];
-      }else{
-        break;
-      }
-    }
-    
-  }
 
-  if(roop){
+    memo[i][j] = true;
+    int ni = i;
+    int nj = j;
+    if (tem == 'U') ni --;
+    if (tem == 'D') ni ++;
+    if (tem == 'L') nj --;
+    if (tem == 'R') nj ++;
+    if (ni >= h || ni <= -1 || nj >= w || nj <= -1)
+      flag = false;
+    if(flag){
+      i = ni;
+      j = nj;
+    }else{
+      break;
+    }
+  }
+  if (roop)
+  {
     cout << -1 << endl;
   }else{
     cout << i + 1 << " " << j + 1 << endl;
