@@ -29,27 +29,13 @@ const int dx8[] = {-1, -1, 0, 1, 1, 1, 0, -1};
 const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
 
-int n;
-int solve(int yen, int amount){
-  int consume = n/amount;
-  return yen * consume;
-}
-
 int main(){
+  int n;
   int x, y;
   cin >> x >> y;
   cin >> n;
-  int plan_a = solve(x,1);
-  int plan_b = solve(y,3);
-  n %= 3;
-  if(n == 0){
-    
-  }else if(n == 1){
-    plan_b += x;
-  }else if(n == 2){
-    plan_b += 2*x;
-  }
-  int ans = min(plan_a, plan_b);;
+  y = min(x*3, y);
+  int ans = n/3*y + n%3*x;
   cout << ans << endl;
   return 0;
 }
