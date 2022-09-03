@@ -46,23 +46,23 @@ int main(){
   }
   for (int i = 0; i < n - 2; i++)
   {
-    int x = i;
-    ll value_x = S[x];
+    ll nindex = i;
+    ll value_x = S[nindex];
     ll find = P+value_x;
-    auto y = lower_bound(S.begin(), S.end(), find) - S.begin();
-    if(y == n || S[y] != find) {
+    auto it = lower_bound(S.begin(), S.end(), find);
+    if(it == S.end() || *it != find) {
       continue;
     }
-    ll value_y = S[y];
-    find = Q+value_y;
-    int z = lower_bound(S.begin(), S.end(), find) - S.begin();
-    if (z == n || S[z] != find){
+    nindex = it - S.begin();
+    find = Q+S[nindex];
+    it = lower_bound(S.begin(), S.end(), find);
+    if (it == S.end() || *it != find){
       continue;
     }
-    ll value_z = S[z];
-    find = R+value_z;
-    int w = lower_bound(S.begin(), S.end(), find) - S.begin(); 
-    if (w == n || S[w] != find)
+    nindex = it - S.begin();
+    find = R+S[nindex];
+    it = lower_bound(S.begin(), S.end(), find);
+    if (it == S.end() || *it != find)
     {
       continue;
     }
