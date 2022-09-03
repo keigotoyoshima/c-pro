@@ -37,50 +37,41 @@ int main(){
   ll P, Q, R;
   cin >> n;
   cin >> P >> Q >> R;
-  vector<int>A(n-1);
+  vector<int>A(n);
   for(auto &v : A) cin >> v;
-  vector<ll>S(n);
-  for (int i = 0; i < n-1; i++)
+  vector<ll>S(n+1);
+  for (int i = 0; i < n; i++)
   {
     S[i+1] = S[i] + A[i];
   }
-  for (int i = 0; i <= n; i++)
+  for (int i = 0; i < n - 2; i++)
   {
     int x = i;
     ll value_x = S[x];
-    int y = lower_bound(S.begin(), S.end(), P + value_x) - S.begin();
-    while (1)
-    {
-      if(S[y] != P + value_x) {
-        break;
-      }
-      ll value_y = S[y];
-      int z = lower_bound(S.begin(), S.end(), Q+value_y) - S.begin();
-      while (1)
-      {
-        if (S[z] != Q + value_y){
-          break;
-        }
-        ll value_z = S[z];
-        int w = lower_bound(S.begin(), S.end(), R+value_z) - S.begin(); 
-
-        while (1)
-        {
-          if (S[w] != R + value_z)
-          {
-            break;
-          }
-          else
-          {
-            cout << "Yes" << endl;
-            return 0;
-          }
-          w++;
-        }
-        z++; 
-      }
-      y++;
+    ll find = P+value_x;
+    auto y = lower_bound(S.begin(), S.end(), find) - S.begin();
+    if(y == n || S[y] != find) {
+      continue;
     }
+    ll value_y = S[y];
+    find = Q+value_y;
+    int z = lower_bound(S.begin(), S.end(), find) - S.begin();
+    if (z == n || S[z] != find){
+      continue;
+    }
+    ll value_z = S[z];
+    find = R+value_z;
+    int w = lower_bound(S.begin(), S.end(), find) - S.begin(); 
+    if (w == n || S[w] != find)
+    {
+      continue;
+    }
+    else
+    {
+      cout << "Yes" << endl;
+      return 0;
+    }
+
   }
   cout << "No" << endl;
 
