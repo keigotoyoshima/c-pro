@@ -44,9 +44,9 @@ int main(){
     {
       for (int j = 0; j < D; j++)
       {
-        for (int k = 0; k < 10; k++)
+        int lim = f ? 10 : tem + 1;
+        for (int k = 0; k < lim; k++)
         {
-          if(f == 0 && k > tem) break;
           dp[i + 1][f == 1 || k != tem][(j + k) % D] += dp[i][f][j];
           dp[i + 1][f == 1 || k != tem][(j + k) % D] %= MOD;
         }
@@ -56,16 +56,6 @@ int main(){
   }
 
   cout << (dp[N][1][0] + dp[N][0][0] - 1 + MOD)%MOD << endl;
-
-  // cout << endl;
-  // for(int i = 0; i <= N; i++){
-  //  for(int j = 0; j < 10; j++){
-  //     cout << dp[i][1][j] << ' ';
-  //   }
-  //   cout << endl;
-  // }
-  // cout << endl;
-  
 
   return 0; 
 }
