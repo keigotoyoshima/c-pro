@@ -34,32 +34,46 @@ const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 // counter clock wise
 // clock wise = 時計回り
 // counter clock wise = 反時計回り
-int main(){
-  vector<pair<int,int>>V;
-  for (int i = 0; i < 4; i++)
-  {
-    int x,y; cin >> x >> y;
-    V.push_back(make_pair(x,y));
+
+struct V
+{
+  int x, y;
+  V(int x=0, int y=0): x(x), y(y) {};
+  V operator-(const V &z){
+    return V(z.x-x, z.y-y);
   }
-  vector<pair<int, int>> A;
-  pair<int,int> B;
-  pair<int, int> C;
+  int cross(const V &z){
+    return  x*z.y - y*z.x;
+  }
+  int ccw(const V &z){
+    int value = cross(z);
+    if (value > 0)
+      return 1;
+    if (value < 0)
+      return -1;
+    return 0; // collinear
+  }
+};
+
+
+int main(){
+  vector<V>p(4);
   for (int i = 0; i < 4; i++)
   {
-    if(i == 0 || i == 2){
-      A.push_back(V[i]);
-    }if else if(i == 1){
-      B = V[i];
-    }else{
-      C = V[i];
+    cin >> p[i].x >> p[i].y;
+  }
+  for (int i = 0; i < 4; i++)
+  {
+    V A = p[i];
+    V B = p[(i+1)%4];
+    V C = p[(i+2)%4];
+    V a = A-B; V c = C-B;
+    if(c.ccw(a) <= 0){
+      cout << "No" << endl;
+      return 0;
     }
   }
-  // int a = A[0].second - A[2].second;
-  int a = A[2].second - A[0].second;
-  int b = A[2].first - A[0].first;
-  
-  
-  
-  
+  cout << "Yes" << endl;
+
   return 0;
 }
