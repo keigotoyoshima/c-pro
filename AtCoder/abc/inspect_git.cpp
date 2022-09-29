@@ -33,5 +33,6 @@ const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
 
 int main(){
+  int a;
   return 0;
 }
