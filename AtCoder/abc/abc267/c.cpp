@@ -34,7 +34,7 @@ int main(){
   vector<ll>A(n);
   vector<ll>cum(n+1);
   for(auto &v : A) cin >> v;
-  for(int i = 0; i < n+1; i++){
+  for(int i = 0; i < n; i++){
     cum[i+1] = cum[i] + A[i];
   }
   ll sum = 0;
