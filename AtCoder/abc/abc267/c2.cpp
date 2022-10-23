@@ -48,29 +48,36 @@ const int dy8[] = {0, 1, 1, 1, 0, -1, -1, -1};
 
 int main()
 {
-  int n, m;
+  ll n, m;
   cin >> n >> m;
   vector<ll> A(n);
+  vector<ll> cum(n + 1);
   for (auto &v : A)
     cin >> v;
-  vector<ll> cum(n + 1);
   for (int i = 0; i < n; i++)
   {
     cum[i + 1] = cum[i] + A[i];
   }
-  ll base = 0;
+  ll sum = 0;
   for (int i = 1; i <= m; i++)
   {
-    base += A[i - 1] * i;
+    sum += A[i - 1] * i;
   }
-  ll res = base;
-  for (int i = m; i < n; i++)
+  ll ans = sum;
+
+  for (int i = 0; i < n - m; i++)
   {
-    ll minus = cum[i] - cum[i-m];
-    ll tem = base - minus + (A[i] * m);
-    res = max(res, tem);
-    base = tem;
+    ll tem = sum;
+    int r = i + m;
+    int l = i;
+    ll minus = cum[r] - cum[l];
+    tem -= minus;
+    tem += A[r] * m;
+    sum = tem;
+
+    ans = max(ans, sum);
   }
-  cout << res << endl;
+
+  cout << ans << endl;
   return 0;
 }
