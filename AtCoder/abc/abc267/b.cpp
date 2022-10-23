@@ -51,23 +51,22 @@ int main(){
     col[5] = true;
   if (S[9] == '0')
     col[6] = true;
+  
 
+  // 1 or true = 倒れている, 0 or false = 立っている
+  vector<int> data(3,-1);
   if(n0){
-    int true_k = 0;
-    int false_k = 0;
-    bool pre_bool;
     for(int i = 0; i < 7; i++){
-      bool c = col[i];
-      if(true_k == 1 && false_k == 1 && c == false){
+      bool current = col[i];
+      if(data[0] == 0 && data[1] == 1 && current == false){
         cout << "Yes" << endl;
         return 0;
-      }else if (false_k == 0 && c == false)
+      }else if (data[0] == 0 && current == true)
       {
-        false_k ++;
-      }else if(false_k == 1 && c == true){
-        true_k ++;
+        data[1] = 1;
+      }else if (data[0] == -1 && current == false){
+        data[0] = 0;
       }
-      
     }
   }else{
     cout << "No" << endl;
