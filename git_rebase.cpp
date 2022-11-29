@@ -1,1 +1,2 @@
-commit second
+rebase check conflict
+
