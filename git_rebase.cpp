@@ -1,2 +1,2 @@
 rebase check conflict
-rebsae check conflict 2 in main
+rebase check conflict in rebase_branch
