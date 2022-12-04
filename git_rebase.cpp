@@ -20,6 +20,11 @@ in rebase_branch
 -----------
 6 in main
 
+<<<<<<< HEAD
 
 -----------
 7 in main
+=======
+6 in forRebase
+66 in forRebase
+>>>>>>> 66 in forRebase
